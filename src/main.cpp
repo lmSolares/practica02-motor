@@ -15,8 +15,7 @@ struct AppState
     Uint64 last_ticks{0};
 
     // Dimensiones y posición inicial del objeto (a manipular a mano inicialmente)
-    float rect_x{440.0f};
-    float rect_y{240.0f};
+    Vector2 player_pos{440.0f, 240.0f};
     float rect_width{60.0f};
     float rect_height{60.0f};
     float speed{300.0f}; // Píxeles por segundo
@@ -71,6 +70,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     // 2. Fase de Actualización (Update)
     // TODO (Paso 2): Obtener el estado del teclado con SDL_GetKeyboardState y mover el rectángulo.
+    /*
     const bool *keys = SDL_GetKeyboardState(nullptr);
     if (keys[SDL_SCANCODE_W] || keys[SDL_SCANCODE_UP])
     {
@@ -87,9 +87,24 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     if (keys[SDL_SCANCODE_D] || keys[SDL_SCANCODE_RIGHT]){
     app->rect_x += app->speed * delta_time;
     }
+    */
     // TODO (Paso 3): Probar el bug del movimiento en diagonal.
     // TODO (Paso 4 y 5): Reemplazar variables sueltas con Vector2 y extraer a Vector2.hpp.
+    const bool *keys = SDL_GetKeyboardState(nullptr);
+    Vector2 input_dir{0.0f, 0.0f};
+    if (keys[SDL_SCANCODE_W] || keys[SDL_SCANCODE_UP]) input_dir.y -= 1.0f;
+    if (keys[SDL_SCANCODE_S] || keys[SDL_SCANCODE_DOWN]) input_dir.y += 1.0f;
+    if (keys[SDL_SCANCODE_A] || keys[SDL_SCANCODE_LEFT]) input_dir.x -= 1.0f;
+    if (keys[SDL_SCANCODE_D] || keys[SDL_SCANCODE_RIGHT]) input_dir.x += 1.0f;
+
     // TODO (Paso 6): Normalizar el vector de dirección para velocidad uniforme.
+    if (input_dir.length_squared() > 0.0f)
+    {
+    input_dir = input_dir.normalized();
+    }
+    Vector2 displacement = input_dir * (app->speed * delta_time);
+    app->player_pos = app->player_pos + displacement;
+
     // TODO (Paso 7): Encapsular en un struct Character (composición sobre herencia).
 
     // 3. Fase de Renderizado
@@ -98,7 +113,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     // Dibujar el rectángulo del jugador
     SDL_SetRenderDrawColor(app->renderer, 60, 180, 100, 255);
-    SDL_FRect player_rect{app->rect_x, app->rect_y, app->rect_width, app->rect_height};
+    SDL_FRect player_rect{app->player_pos.x, app->player_pos.y, app->rect_width, app->rect_height};
     SDL_RenderFillRect(app->renderer, &player_rect);
 
     SDL_RenderPresent(app->renderer);
