@@ -2,6 +2,7 @@
 
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include "Vector2.hpp"
 
 void SDL_LogPlatformInfo();
 
