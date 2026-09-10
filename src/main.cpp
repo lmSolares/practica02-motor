@@ -6,6 +6,14 @@
 
 void SDL_LogPlatformInfo();
 
+struct Character
+{
+    Vector2 position{440.0f, 240.0f};
+    Vector2 size{60.0f, 60.0f};
+    float speed{300.0f};
+    SDL_Color color{60, 180, 100, 255};
+};
+
 struct AppState
 {
     SDL_Renderer *renderer{nullptr};
@@ -14,11 +22,7 @@ struct AppState
     // Temporizador para Delta Time
     Uint64 last_ticks{0};
 
-    // Dimensiones y posición inicial del objeto (a manipular a mano inicialmente)
-    Vector2 player_pos{440.0f, 240.0f};
-    float rect_width{60.0f};
-    float rect_height{60.0f};
-    float speed{300.0f}; // Píxeles por segundo
+    Character player;
 } appstate;
 
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv)
@@ -102,8 +106,8 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     {
     input_dir = input_dir.normalized();
     }
-    Vector2 displacement = input_dir * (app->speed * delta_time);
-    app->player_pos = app->player_pos + displacement;
+    Vector2 displacement = input_dir * (app->player.speed * delta_time);
+    app->player.position = app->player.position + displacement;
 
     // TODO (Paso 7): Encapsular en un struct Character (composición sobre herencia).
 
@@ -113,7 +117,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     // Dibujar el rectángulo del jugador
     SDL_SetRenderDrawColor(app->renderer, 60, 180, 100, 255);
-    SDL_FRect player_rect{app->player_pos.x, app->player_pos.y, app->rect_width, app->rect_height};
+    SDL_FRect player_rect{app->player.position.x, app->player.position.y, app->player.size.x, app->player.size.y};
     SDL_RenderFillRect(app->renderer, &player_rect);
 
     SDL_RenderPresent(app->renderer);
