@@ -70,6 +70,22 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     // 2. Fase de Actualización (Update)
     // TODO (Paso 2): Obtener el estado del teclado con SDL_GetKeyboardState y mover el rectángulo.
+    const bool *keys = SDL_GetKeyboardState(nullptr);
+    if (keys[SDL_SCANCODE_W] || keys[SDL_SCANCODE_UP])
+    {
+    app->rect_y -= app->speed * delta_time;
+    }
+    if (keys[SDL_SCANCODE_S] || keys[SDL_SCANCODE_DOWN])
+    {
+    app->rect_y += app->speed * delta_time;
+    }
+    if (keys[SDL_SCANCODE_A] || keys[SDL_SCANCODE_LEFT])
+    {
+    app->rect_x -= app->speed * delta_time;
+    }
+    if (keys[SDL_SCANCODE_D] || keys[SDL_SCANCODE_RIGHT]){
+    app->rect_x += app->speed * delta_time;
+    }
     // TODO (Paso 3): Probar el bug del movimiento en diagonal.
     // TODO (Paso 4 y 5): Reemplazar variables sueltas con Vector2 y extraer a Vector2.hpp.
     // TODO (Paso 6): Normalizar el vector de dirección para velocidad uniforme.
