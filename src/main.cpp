@@ -23,6 +23,9 @@ struct AppState
     Uint64 last_ticks{0};
 
     Character player;
+
+    /* Acumulador de tiempo para físicas */
+    float physics_accumulator{0.0f};
 } appstate;
 
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv)
@@ -55,6 +58,12 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv)
 
     *appstate = &::appstate;
     return SDL_APP_CONTINUE;
+}
+
+void PhysicsUpdate(Character &character, const Vector2 &direction, float fixed_dt)
+{
+    Vector2 displacement = direction * (character.speed * fixed_dt);
+    character.position = character.position + displacement;
 }
 
 SDL_AppResult SDL_AppIterate(void *appstate)
@@ -106,8 +115,14 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     {
     input_dir = input_dir.normalized();
     }
-    Vector2 displacement = input_dir * (app->player.speed * delta_time);
-    app->player.position = app->player.position + displacement;
+
+    constexpr float FIXED_TIMESTEP = 1.0f / 60.0f; // 60 Hz estables
+    app->physics_accumulator += delta_time;
+    while (app->physics_accumulator >= FIXED_TIMESTEP)
+    {
+        PhysicsUpdate(app->player, input_dir, FIXED_TIMESTEP);
+        app->physics_accumulator -= FIXED_TIMESTEP;
+    }
 
     // TODO (Paso 7): Encapsular en un struct Character (composición sobre herencia).
 
