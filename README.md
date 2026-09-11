@@ -7,7 +7,9 @@
 #### Ejecución 
 Se muestra la ejecución del programa
 
-![](media/ejecucion.mp4)
+<video width="320" height="240" controls>
+  <source src="media/ejecucion.mp4" type="video/mp4">
+</video>
 
 #### Commits
 Para ver los commmits que se hicieron se puede ver el archivo *log.txt* donde se encuentra la salida del comando
