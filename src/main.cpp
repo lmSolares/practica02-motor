@@ -63,7 +63,14 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv)
 void PhysicsUpdate(Character &character, const Vector2 &direction, float fixed_dt)
 {
     Vector2 displacement = direction * (character.speed * fixed_dt);
-    character.position = character.position + displacement;
+    Vector2 position = character.position + displacement;
+
+    if(position.x < 0) position.x = 0;
+    if(position.x > 960 - character.size.x) position.x = 960 - character.size.x;
+    if(position.y < 0) position.y = 0;
+    if(position.y > 540 - character.size.y) position.y = 540 - character.size.y;
+
+    character.position = position;
 }
 
 SDL_AppResult SDL_AppIterate(void *appstate)
@@ -113,7 +120,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     // TODO (Paso 6): Normalizar el vector de dirección para velocidad uniforme.
     if (input_dir.length_squared() > 0.0f)
     {
-    input_dir = input_dir.normalized();
+        input_dir = input_dir.normalized();
     }
 
     constexpr float FIXED_TIMESTEP = 1.0f / 60.0f; // 60 Hz estables
