@@ -3,6 +3,14 @@
 ### Username Github: lmSolares
 
 #### Error diagonal
+El error pasa cuando presionamos dos teclas al mismo tiempo , al movernos en diagonal se crea un vector *v = (1,-1)*,
+si calculamos su longitud: 
+
+Lo cual es mayor a 1, por lo que cuando multipliquemos por la velocidad *300px/s* entonces se moveria *424.26*, cuando
+el límite es *300*. Entonces la solución es normalizar el vector, haciendo esto se mantiene su dirección, pero la 
+longitud se mantiene en *1*. La demostración es la siguiente: 
+
+![](media/dem.jpeg)
 
 #### Ejecución 
 Se muestra la ejecución del programa
