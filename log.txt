@@ -1,0 +1,47 @@
+commit aaa8df81e9b55486e2a3ad244d367f24a9a7c5e2
+Author: Luis Ramos <lmsr.solares@gmail.com>
+Date:   Thu Sep 10 21:01:26 2026 -0600
+
+    Practica02: Personaje confinado en la ventana
+
+commit c5f739a44aced5b98c83e8be0d951027bc491e6e
+Author: Luis Ramos <lmsr.solares@gmail.com>
+Date:   Thu Sep 10 17:43:10 2026 -0600
+
+    Practica02: Desacoplamiento de físicas
+
+commit f6f87fff06244014c4c064311ad676616b60b405
+Author: Luis Ramos <lmsr.solares@gmail.com>
+Date:   Thu Sep 10 17:38:02 2026 -0600
+
+    Practica02: agregar la estructura Character y actualizar movimiento
+
+commit 21c923f71897bfbd0b3b8e048cc9d7c1618fd440
+Author: Luis Ramos <lmsr.solares@gmail.com>
+Date:   Thu Sep 10 17:33:18 2026 -0600
+
+    Practica02: Comentar movimiento anterior e integrar Vector2 para normalización
+
+commit ad5f7de159d638b7bc2cf720bfef0a292cd5a0fe
+Author: Luis Ramos <lmsr.solares@gmail.com>
+Date:   Thu Sep 10 17:25:33 2026 -0600
+
+    Practica02: Integración de Vector2
+
+commit e7c2180aec63a969ea59f3bf51f27617fd923a82
+Author: Luis Ramos <lmsr.solares@gmail.com>
+Date:   Thu Sep 10 17:24:38 2026 -0600
+
+    untrack build
+
+commit 70970fad4fbb38b542417a1416e33865452c65bd
+Author: Luis Ramos <lmsr.solares@gmail.com>
+Date:   Thu Sep 10 17:11:01 2026 -0600
+
+    Practica02: obtener estado de teclado y mover rectángulo
+
+commit cf729697fe9bdaed5e74c7da29e74a110ef95dcb
+Author: Luis Ramos <lmsr.solares@gmail.com>
+Date:   Wed Sep 9 16:02:17 2026 -0600
+
+    Práctica 02: Inicialización de la práctica
