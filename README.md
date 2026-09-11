@@ -7,9 +7,7 @@
 #### Ejecución 
 Se muestra la ejecución del programa
 
-<video width="320" height="240" controls>
-  <source src="media/ejecucion.mp4" type="video/mp4">
-</video>
+![](media/ejecucion.gif)
 
 #### Commits
 Para ver los commmits que se hicieron se puede ver el archivo *log.txt* donde se encuentra la salida del comando
@@ -25,4 +23,4 @@ que establecemos, entonces la coordenada donde se saldría no la actualizamos y 
 calcular la nueva posición en *x* es menor a *0*, entonces *x* se mantendrá en *0*. Pasa lo mismo en los cuatro límites
 que se establecieron. Se adjunta la demostración del resultado: 
 
-![](media/limites.mp4)
+![](media/limites.gif)
