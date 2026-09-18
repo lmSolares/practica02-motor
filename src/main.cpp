@@ -55,12 +55,12 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
   // Entidad Obstáculo: reutiliza Transform y RectRender sin necesitar
   // PlayerController
   auto obstacle = std::make_unique<GameObject>("Obstacle");
+  obstacle->AddComponent<PatrolComponent>(120.0f, 100.0f);
   obstacle->AddComponent<TransformComponent>(Vector2{150.0f, 120.0f},
                                              Vector2{1.5f, 1.5f});
   obstacle->AddComponent<RectRenderComponent>(Vector2{40.0f, 40.0f},
                                               SDL_Color{220, 70, 70, 255});
   ::appstate.entities.push_back(std::move(obstacle));
-  obstacle->AddComponent<PatrolComponent>(120.0f, 100.0f);
 
   SDL_Log("Renderer Driver activo: %s", SDL_GetRendererName(renderer));
 
