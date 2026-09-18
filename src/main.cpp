@@ -1,5 +1,6 @@
 #define SDL_MAIN_USE_CALLBACKS 1
 #include "GameObject.hpp"
+#include "PatrolComponent.hpp"
 #include "PlayerControllerComponent.hpp"
 #include "RectRenderComponent.hpp"
 #include "TransformComponent.hpp"
@@ -51,6 +52,16 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
   player->AddComponent<PlayerControllerComponent>(300.0f, true);
   ::appstate.entities.push_back(std::move(player));
 
+  // Entidad Obstáculo: reutiliza Transform y RectRender sin necesitar
+  // PlayerController
+  auto obstacle = std::make_unique<GameObject>("Obstacle");
+  obstacle->AddComponent<TransformComponent>(Vector2{150.0f, 120.0f},
+                                             Vector2{1.5f, 1.5f});
+  obstacle->AddComponent<RectRenderComponent>(Vector2{40.0f, 40.0f},
+                                              SDL_Color{220, 70, 70, 255});
+  ::appstate.entities.push_back(std::move(obstacle));
+  obstacle->AddComponent<PatrolComponent>(120.0f, 100.0f);
+
   SDL_Log("Renderer Driver activo: %s", SDL_GetRendererName(renderer));
 
   ::appstate.window = window;
@@ -59,23 +70,6 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
 
   *appstate = &::appstate;
   return SDL_APP_CONTINUE;
-}
-
-void PhysicsUpdate(Character &character, const Vector2 &direction,
-                   float fixed_dt) {
-  Vector2 displacement = direction * (character.speed * fixed_dt);
-  Vector2 position = character.position + displacement;
-
-  if (position.x < 0)
-    position.x = 0;
-  if (position.x > 960 - character.size.x)
-    position.x = 960 - character.size.x;
-  if (position.y < 0)
-    position.y = 0;
-  if (position.y > 540 - character.size.y)
-    position.y = 540 - character.size.y;
-
-  character.position = position;
 }
 
 SDL_AppResult SDL_AppIterate(void *appstate) {
