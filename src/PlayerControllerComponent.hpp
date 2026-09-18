@@ -15,8 +15,7 @@ public:
   void Update(float dt) override {
     if (!owner)
       return;
-    TransformComponent *transform =
-        owner - > GetComponent<TransformComponent>();
+    TransformComponent *transform = owner->GetComponent<TransformComponent>();
     if (!transform)
       return;
     // 1. Lectura continua de teclado
