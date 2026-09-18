@@ -17,12 +17,15 @@ public:
   GameObject() = default;
   explicit GameObject(std::string tag) : m_tag(std::move(tag)) {}
   ~GameObject() = default;
+
   // Deshabilitar copia para garantizar la propiedad estricta de unique_ptr
   GameObject(const GameObject &) = delete;
   GameObject &operator=(const GameObject &) = delete;
+
   // Habilitar movimiento en memoria
   GameObject(GameObject &&) noexcept = default;
   GameObject &operator=(GameObject &&) noexcept = default;
+
   // Identificación y estado
   const std::string &GetTag() const { return m_tag; }
 
@@ -30,9 +33,8 @@ public:
   bool IsActive() const { return m_active; }
   void SetActive(bool active) { m_active = active; }
 
-  // Para armar componentes con reenvío perfectotemplate <typename T,
-  // typename... Args>
-  T *AddComponent(Args &&...args) {
+  // Para armar componentes con reenvío perfecto
+  template <typename T, typename... Args> T *AddComponent(Args &&...args) {
     static_assert(std::is_base_of_v<Component, T>,
                   "T debe derivar de Component");
     auto component = std::make_unique<T>(std::forward<Args>(args)...);
