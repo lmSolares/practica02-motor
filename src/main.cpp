@@ -1,4 +1,5 @@
 #define SDL_MAIN_USE_CALLBACKS 1
+#include "CollisionManager.hpp"
 #include "GameObject.hpp"
 #include "PatrolComponent.hpp"
 #include "PlayerControllerComponent.hpp"
@@ -17,7 +18,9 @@ struct AppState {
   Uint64 last_ticks{0};
   float physics_accumulator{0.0f};
   // Colección de todas las entidades activas en el mundo
+  bool debug_draw{true};
   std::vector<std::unique_ptr<GameObject>> entities;
+  CollisionManager collisionManager{&entities};
 } appstate;
 
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
@@ -104,27 +107,54 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
   // Fase de Actualización
   constexpr float FIXED_TIMESTEP = 1.0f / 60.0f;
   app->physics_accumulator += delta_time;
+
   while (app->physics_accumulator >= FIXED_TIMESTEP) {
     for (auto &entity : app->entities) {
       entity->Update(FIXED_TIMESTEP);
     }
+
+    app->collisionManager.CheckCollisions();
+
     app->physics_accumulator -= FIXED_TIMESTEP;
   }
+
   // Fase de Renderizado
   SDL_SetRenderDrawColor(app->renderer, 25, 25, 30, 255);
   SDL_RenderClear(app->renderer);
+
   for (auto &entity : app->entities) {
     entity->Render(app->renderer);
   }
+
+  if (app->debug_draw) {
+    for (auto &entity : app->entities) {
+      if (auto *col = entity->GetComponent<ColliderComponent>()) {
+        col->RenderDebug(app->renderer);
+      }
+    }
+  }
+
   SDL_RenderPresent(app->renderer);
 
   return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
+  AppState *app = static_cast<AppState *>(appstate);
+
   if (event->type == SDL_EVENT_QUIT) {
     return SDL_APP_SUCCESS;
   }
+
+  if (event->type == SDL_EVENT_KEY_DOWN &&
+      event->key.scancode == SDL_SCANCODE_F1) {
+    if (app) {
+      app->debug_draw = !app->debug_draw;
+      SDL_Log("Debug Draw: %s",
+              app->debug_draw ? "Habilitado" : "Desahabilitado");
+    }
+  }
+
   return SDL_APP_CONTINUE;
 }
 
