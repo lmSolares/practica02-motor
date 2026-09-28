@@ -1,4 +1,5 @@
 #pragma once
+#include "ColliderComponent.hpp"
 #include "Component.hpp"
 #include "GameObject.hpp"
 #include "RectRenderComponent.hpp"
@@ -59,5 +60,53 @@ public:
     }
     transform->position =
         transform->position.clamp(Vector2{0.0f, 0.0f}, max_bounds);
+  }
+
+  void OnCollision(GameObject *other) override {
+    if (!owner || !other)
+      return;
+
+    auto *my_transform = owner->GetComponent<TransformComponent>();
+    auto *my_col = owner->GetComponent<ColliderComponent>();
+    auto *other_col = other->GetComponent<ColliderComponent>();
+
+    if (!my_transform || !my_col || !other_col)
+      return;
+
+    if (other_col->is_trigger)
+      return;
+
+    SDL_FRect my_bounds = my_col->GetWorldBounds();
+    SDL_FRect other_bounds = other_col->GetWorldBounds();
+
+    float my_center_x = my_bounds.x + my_bounds.w * 0.5f;
+    float my_center_y = my_bounds.y + my_bounds.h * 0.5f;
+    float other_center_x = other_bounds.x + other_bounds.w * 0.5f;
+    float other_center_y = other_bounds.y + other_bounds.h * 0.5f;
+
+    float dx = my_center_x - other_center_x;
+    float dy = my_center_y - other_center_y;
+
+    float overlap_x =
+        (my_bounds.w * 0.5f + other_bounds.w * 0.5f) - std::abs(dx);
+    float overlap_y =
+        (my_bounds.h * 0.5f + other_bounds.h * 0.5f) - std::abs(dy);
+
+    if (overlap_x > 0.0f && overlap_y > 0.0f) {
+      if (overlap_x < overlap_y) {
+
+        if (dx > 0) {
+          my_transform->position.x += overlap_x;
+        } else {
+          my_transform->position.x -= overlap_x;
+        }
+      } else {
+        if (dy > 0) {
+          my_transform->position.y += overlap_y;
+        } else {
+          my_transform->position.y -= overlap_y;
+        }
+      }
+    }
   }
 };
