@@ -1,7 +1,8 @@
 #define SDL_MAIN_USE_CALLBACKS 1
+#include "BallComponent.hpp"
 #include "CollisionManager.hpp"
 #include "GameObject.hpp"
-#include "PatrolComponent.hpp"
+// #include "PatrolComponent.hpp"
 #include "PlayerControllerComponent.hpp"
 #include "RectRenderComponent.hpp"
 #include "TransformComponent.hpp"
@@ -38,32 +39,41 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
   SDL_Window *window = nullptr;
   SDL_Renderer *renderer = nullptr;
 
-  if (!SDL_CreateWindowAndRenderer(
-          "Práctica 03 - Arquitectura de motores: GameObject y componentes",
-          960, 540, SDL_WINDOW_RESIZABLE, &window, &renderer)) {
+  if (!SDL_CreateWindowAndRenderer("Práctica 04 - Detección de colisiones AABB",
+                                   960, 540, SDL_WINDOW_RESIZABLE, &window,
+                                   &renderer)) {
     SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
                  "Error al crear ventana o renderer: %s", SDL_GetError());
     return SDL_APP_FAILURE;
   }
 
-  // Armamos del Jugador
+  // Jugador
   auto player = std::make_unique<GameObject>("Player");
-  player->AddComponent<TransformComponent>(Vector2{440.0f, 240.0f},
-                                           Vector2{1.0f, 1.0f});
+  player->AddComponent<TransformComponent>(Vector2{440.0f, 240.0f});
   player->AddComponent<RectRenderComponent>(Vector2{60.0f, 60.0f},
                                             SDL_Color{60, 180, 100, 255});
-  player->AddComponent<PlayerControllerComponent>(300.0f, true);
+  player->AddComponent<PlayerControllerComponent>(300.0f, false);
+  player->AddComponent<ColliderComponent>();
   ::appstate.entities.push_back(std::move(player));
 
-  // Entidad Obstáculo: reutiliza Transform y RectRender sin necesitar
-  // PlayerController
+  // Obstáculo
   auto obstacle = std::make_unique<GameObject>("Obstacle");
-  obstacle->AddComponent<PatrolComponent>(120.0f, 100.0f);
-  obstacle->AddComponent<TransformComponent>(Vector2{150.0f, 120.0f},
-                                             Vector2{1.5f, 1.5f});
-  obstacle->AddComponent<RectRenderComponent>(Vector2{40.0f, 40.0f},
+  obstacle->AddComponent<TransformComponent>(Vector2{180.0f, 140.0f});
+  obstacle->AddComponent<RectRenderComponent>(Vector2{80.0f, 80.0f},
                                               SDL_Color{220, 70, 70, 255});
+  auto *obsCol = obstacle->AddComponent<ColliderComponent>();
+  obsCol->size = Vector2{80.0f, 80.0f};
   ::appstate.entities.push_back(std::move(obstacle));
+
+  // Pelota
+  auto ball = std::make_unique<GameObject>("Ball");
+  ball->AddComponent<TransformComponent>(Vector2{468.0f, 80.0f});
+  ball->AddComponent<RectRenderComponent>(Vector2{24.0f, 24.0f},
+                                          SDL_Color{240, 210, 60, 255});
+  auto *ballCol = ball->AddComponent<ColliderComponent>();
+  ballCol->size = Vector2{24.0f, 24.0f};
+  ball->AddComponent<BallComponent>();
+  ::appstate.entities.push_back(std::move(ball));
 
   SDL_Log("Renderer Driver activo: %s", SDL_GetRendererName(renderer));
 
