@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(practica03_motor LANGUAGES CXX)
+project(practica04_motor LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Detección de SDL3
