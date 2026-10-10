@@ -7,7 +7,9 @@
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_scancode.h>
 #include <string>
-#include "GameScene.hpp"
+
+class GameScene;
+class TitleScene;
 
 class TitleScene : public Scene {
 
@@ -43,15 +45,6 @@ class TitleScene : public Scene {
             SDL_RenderFillRect(renderer, &rectButton);
         }
 
-        void HandleEvent(const SDL_Event &event) override
-        {
-            if (event.type == SDL_EVENT_KEY_DOWN)
-            {
-                if(event.key.scancode == SDL_SCANCODE_SPACE || event.key.key == SDL_SCANCODE_RETURN)
-                {
-                    m_manager->ChangeScene(std::make_unique<GameScene>(m_manager));
-                }
-            }
-        }
+        void HandleEvent(const SDL_Event &event) override;
 
 };
