@@ -20,25 +20,7 @@ Cuando queremos cambiar de escena podríamos solamente quitar la escena actual c
 
 ### Diagrama de flujo
 
-```mermaid
-stateDiagram-v2
-  [*] --> TitleScene : Iniciar Motor
-  TitleScene --> GameScene : ESPACIO / ENTER (Change)
-    
-  state GameScene {
-    [*] --> Jugando
-    Jugando --> ColisionDetectada
-    ColisionDetectada --> Jugando
-  }
-    
-  GameScene --> PauseScene : P / ESCAPE (Push)
-  PauseScene --> GameScene : P / ESCAPE (Pop)
-    
-  GameScene --> GameOverScene : G / Condición de Derrota (Change)
-    
-  GameOverScene --> GameScene : R (Reiniciar) (Change)
-  GameOverScene --> TitleScene : M / ESCAPE (Menú) (Change)
-```
+![Diagrama de flujo](diagrama_de_flujo.png)
 
 ### Capturas de pantalla
 
