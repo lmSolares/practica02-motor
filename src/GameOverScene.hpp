@@ -1,13 +1,10 @@
 #pragma once
 
-
-#include "GameScene.hpp"
-#include "Scene.hpp"
 #include <SDL3/SDL_events.h>
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_scancode.h>
+#include "Scene.hpp"
 #include "SceneManager.hpp"
-#include "TitleScene.hpp"
 
 class GameOverScene : public Scene {
 
@@ -49,19 +46,6 @@ class GameOverScene : public Scene {
             SDL_RenderFillRect(renderer, &rectMenu);
         }
 
-        void HandleEvent(const SDL_Event &event) override
-        {
-            if(event.type == SDL_EVENT_KEY_DOWN)
-            {
-                if(event.key.scancode == SDL_SCANCODE_R)
-                {
-                    m_manager->ChangeScene(std::make_unique<GameScene>(m_manager));
-                }
-                if(event.key.scancode == SDL_SCANCODE_M)
-                {
-                    m_manager->ChangeScene(std::make_unique<TitleScene>(m_manager));
-                }
-            }
-        }
+        void HandleEvent(const SDL_Event &event) override;
 
 };
