@@ -18,22 +18,18 @@ public:
   explicit GameObject(std::string tag) : m_tag(std::move(tag)) {}
   ~GameObject() = default;
 
-  // Deshabilitar copia para garantizar la propiedad estricta de unique_ptr
   GameObject(const GameObject &) = delete;
   GameObject &operator=(const GameObject &) = delete;
 
-  // Habilitar movimiento en memoria
   GameObject(GameObject &&) noexcept = default;
   GameObject &operator=(GameObject &&) noexcept = default;
 
-  // Identificación y estado
   const std::string &GetTag() const { return m_tag; }
 
   void SetTag(std::string tag) { m_tag = std::move(tag); }
   bool IsActive() const { return m_active; }
   void SetActive(bool active) { m_active = active; }
 
-  // Para armar componentes con reenvío perfecto
   template <typename T, typename... Args> T *AddComponent(Args &&...args) {
     static_assert(std::is_base_of_v<Component, T>,
                   "T debe derivar de Component");
@@ -45,7 +41,6 @@ public:
     return ptr;
   }
 
-  // Consulta de componentes
   template <typename T> T *GetComponent() const {
     static_assert(std::is_base_of_v<Component, T>,
                   "T debe derivar de Component");
@@ -61,7 +56,6 @@ public:
     return GetComponent<T>() != nullptr;
   }
 
-  // Propagación del ciclo de vida a todos los componentes hijos
   void Update(float dt) {
     if (!m_active)
       return;
