@@ -15,6 +15,8 @@ endif()
 # Declaración de ejecutables y fuentes
 add_executable(${PROJECT_NAME}
 src/main.cpp
+src/GameOverScene.cpp
+src/GameScene.cpp
 src/Vector2.hpp
 src/Component.hpp
 src/GameObject.hpp
