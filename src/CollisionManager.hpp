@@ -22,6 +22,11 @@ public:
     return CheckAABB(a.GetWorldBounds(), b.GetWorldBounds());
   }
 
+  void SetEntities(std::vector<std::unique_ptr<GameObject>> *m_entities)
+  {
+      this->m_entities = m_entities;
+  }
+
   void CheckCollisions() {
     for (auto &entity : *m_entities) {
       if (auto *collider = entity->GetComponent<ColliderComponent>()) {
