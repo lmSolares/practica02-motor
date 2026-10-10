@@ -103,4 +103,9 @@ class SceneManager {
             for(auto &scene : m_scenes) scene->Render(renderer);
         }
 
+        bool HasScenes()
+        {
+            return !m_scenes.empty();
+        }
+
 };
