@@ -1,11 +1,12 @@
 #pragma once
 #include "GameObject.hpp"
-#include "SceneManager.hpp"
 #include <SDL3/SDL_events.h>
 #include <SDL3/SDL_render.h>
 #include <memory>
 #include <string>
 #include <vector>
+
+class SceneManager;
 
 class Scene {
     protected:
