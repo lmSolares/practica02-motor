@@ -4,6 +4,8 @@
 #include "motor/RectRenderComponent.hpp"
 #include "motor/TransformComponent.hpp"
 #include "motor/Vector2.hpp"
+#include "proyecto01/components/KnightControllerComponent.hpp"
+#include "proyecto01/components/StingStrikeComponent.hpp"
 #include "proyecto01/scenes/GameOverScene.hpp"
 #include "proyecto01/scenes/PauseScene.hpp"
 #include <SDL3/SDL_pixels.h>
@@ -53,6 +55,26 @@ void GameplayScene::Init() {
   auto *trigCol1 = spikeRight->AddComponent<ColliderComponent>();
   trigCol1->size = Vector2{140.0f, 20.0f};
   trigCol1->is_trigger = true;
+
+  /* Entidades */
+
+  // Caballero
+  GameObject *knight = CreateGameObject("Knight");
+  knight->AddComponent<TransformComponent>(Vector2{460.0f, 400.0f});
+  knight->AddComponent<RectRenderComponent>(Vector2{32.0f, 48.0f},
+                                            SDL_Color{250, 254, 255, 255});
+  auto *knightCol = knight->AddComponent<ColliderComponent>();
+  knightCol->size = Vector2{32.0f, 48.0f};
+  knight->AddComponent<KnightControllerComponent>(300.0f);
+
+  /* Aguijon */
+  GameObject *sting = CreateGameObject("Sting");
+  sting->AddComponent<RectRenderComponent>(Vector2{5.0f, 10.0f},
+                                           SDL_Color{176, 172, 184, 255});
+  auto *stingCol = sting->AddComponent<ColliderComponent>();
+  stingCol->is_trigger = true;
+  sting->AddComponent<StingStrikeComponent>();
+  sting->SetActive(false);
 }
 
 void GameplayScene::FixedUpdate(float fixed_dt) {
