@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../motor/Scene.hpp"
-#include "../../motor/SceneManager.hpp"
+#include "motor/Scene.hpp"
+#include "motor/SceneManager.hpp"
 
 class PauseScene : public Scene {
 public:

@@ -1,6 +1,6 @@
 #pragma once
-#include "../../motor/Scene.hpp"
-#include "../../motor/SceneManager.hpp"
+#include "motor/Scene.hpp"
+#include "motor/SceneManager.hpp"
 
 class TitleScene : public Scene {
 public:

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../motor/CollisionManager.hpp"
-#include "../../motor/Scene.hpp"
-#include "../../motor/SceneManager.hpp"
+#include "motor/CollisionManager.hpp"
+#include "motor/Scene.hpp"
+#include "motor/SceneManager.hpp"
 
 class GameplayScene : public Scene {
 
