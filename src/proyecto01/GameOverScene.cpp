@@ -1,5 +1,4 @@
 #include "../../include/proyecto01/scenes/GameOverScene.hpp"
-#include "../../include/motor/ColliderComponent.hpp"
 #include "../../include/proyecto01/scenes/GameplayScene.hpp"
 #include "../../include/proyecto01/scenes/TitleScene.hpp"
 
@@ -44,21 +43,6 @@ void GameOverScene::HandleEvent(const SDL_Event &event) {
     }
     if (event.key.scancode == SDL_SCANCODE_M) {
       m_manager->ChangeScene(std::make_unique<TitleScene>(m_manager));
-    }
-  }
-}
-
-void GameplayScene::Render(SDL_Renderer *renderer) {
-  SDL_SetRenderDrawColor(renderer, 25, 25, 30, 255);
-  SDL_RenderClear(renderer);
-
-  for (auto &entity : m_entities)
-    entity->Render(renderer);
-
-  if (m_debugDraw) {
-    for (auto &entity : m_entities) {
-      if (auto *col = entity->GetComponent<ColliderComponent>())
-        col->RenderDebug(renderer);
     }
   }
 }
