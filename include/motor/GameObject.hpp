@@ -1,0 +1,63 @@
+#pragma once
+#include "Component.hpp"
+#include <SDL3/SDL.h>
+#include <memory>
+#include <string>
+#include <type_traits>
+#include <utility>
+#include <vector>
+
+class GameObject {
+private:
+  std::vector<std::unique_ptr<Component>> m_components;
+  std::string m_tag{"GameObject"};
+  bool m_active{true};
+
+public:
+  GameObject() = default;
+  explicit GameObject(std::string tag) : m_tag(std::move(tag)) {}
+  ~GameObject() = default;
+
+  GameObject(const GameObject &) = delete;
+  GameObject &operator=(const GameObject &) = delete;
+
+  GameObject(GameObject &&) noexcept = default;
+  GameObject &operator=(GameObject &&) noexcept = default;
+
+  const std::string &GetTag() const { return m_tag; }
+
+  void SetTag(std::string tag) { m_tag = std::move(tag); }
+  bool IsActive() const { return m_active; }
+  void SetActive(bool active) { m_active = active; }
+
+  template <typename T, typename... Args> T *AddComponent(Args &&...args) {
+    static_assert(std::is_base_of_v<Component, T>,
+                  "T debe derivar de Component");
+    auto component = std::make_unique<T>(std::forward<Args>(args)...);
+    component->owner = this;
+    component->Init();
+    T *ptr = component.get();
+    m_components.push_back(std::move(component));
+    return ptr;
+  }
+
+  template <typename T> T *GetComponent() const {
+    static_assert(std::is_base_of_v<Component, T>,
+                  "T debe derivar de Component");
+    for (const auto &component : m_components) {
+      if (auto casted = dynamic_cast<T *>(component.get())) {
+        return casted;
+      }
+    }
+    return nullptr;
+  }
+
+  template <typename T> bool HasComponent() const {
+    return GetComponent<T>() != nullptr;
+  }
+
+  void FixedUpdate(float fixed_dt);
+  void Update(float dt);
+  void Render(SDL_Renderer *renderer);
+  void OnCollision(GameObject *other);
+};
