@@ -1,5 +1,5 @@
-#include "../../include/practicas/TitleScene.hpp"
-#include "../../include/practicas/GameScene.hpp"
+#include "practicas/TitleScene.hpp"
+#include "practicas/GameScene.hpp"
 
 void TitleScene::Render(SDL_Renderer *renderer) {
   // Fondo

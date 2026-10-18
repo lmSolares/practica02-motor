@@ -1,6 +1,6 @@
 #define SDL_MAIN_USE_CALLBACKS 1
-#include "../../include/motor/SceneManager.hpp"
-#include "../../include/proyecto01/scenes/TitleScene.hpp"
+#include "motor/SceneManager.hpp"
+#include "proyecto01/scenes/TitleScene.hpp"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <memory>

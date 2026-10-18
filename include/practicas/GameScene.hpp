@@ -1,11 +1,8 @@
 #pragma once
 
-#include "../motor/CollisionManager.hpp"
-#include "../motor/Scene.hpp"
-#include "../motor/SceneManager.hpp"
-
-#include <SDL3/SDL_render.h>
-#include <SDL3/SDL_scancode.h>
+#include "motor/CollisionManager.hpp"
+#include "motor/Scene.hpp"
+#include "motor/SceneManager.hpp"
 
 class GameScene : public Scene {
 

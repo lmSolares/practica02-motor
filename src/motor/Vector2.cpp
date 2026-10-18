@@ -1,4 +1,4 @@
-#include "../../include/motor/Vector2.hpp"
+#include "motor/Vector2.hpp"
 #include <cmath>
 
 Vector2 Vector2::operator+(const Vector2 &other) const {

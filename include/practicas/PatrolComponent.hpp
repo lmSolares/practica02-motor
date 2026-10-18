@@ -1,5 +1,5 @@
 #pragma once
-#include "../motor/Component.hpp"
+#include "motor/Component.hpp"
 
 class PatrolComponent : public Component {
 public:

@@ -1,10 +1,5 @@
 #pragma once
-#include "../../include/motor/GameObject.hpp"
-#include <SDL3/SDL_events.h>
-#include <SDL3/SDL_render.h>
-#include <memory>
-#include <string>
-#include <vector>
+#include "GameObject.hpp"
 
 class SceneManager;
 

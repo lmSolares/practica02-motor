@@ -1,8 +1,5 @@
 #pragma once
 #include "Scene.hpp"
-#include <SDL3/SDL_render.h>
-#include <memory>
-#include <vector>
 
 enum class SceneAction { None, Change, Push, Pop, Clear };
 

@@ -1,7 +1,7 @@
 #pragma once
-#include "../../include/motor/Component.hpp"
-#include "../../include/motor/GameObject.hpp"
-#include <SDL3/SDL.h>
+#include "motor/Component.hpp"
+#include "motor/GameObject.hpp"
+
 class PlayerControllerComponent : public Component {
 public:
   float speed{300.0f};

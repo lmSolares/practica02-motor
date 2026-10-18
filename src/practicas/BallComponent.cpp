@@ -1,7 +1,7 @@
-#include "../../include/practicas/BallComponent.hpp"
-#include "../../include/motor/ColliderComponent.hpp"
-#include "../../include/motor/RectRenderComponent.hpp"
-#include "../../include/motor/TransformComponent.hpp"
+#include "practicas/BallComponent.hpp"
+#include "motor/ColliderComponent.hpp"
+#include "motor/RectRenderComponent.hpp"
+#include "motor/TransformComponent.hpp"
 
 void BallComponent::FixedUpdate(float dt) {
   if (!owner)

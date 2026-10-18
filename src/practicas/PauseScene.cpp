@@ -1,4 +1,4 @@
-#include "../../include/practicas/PauseScene.hpp"
+#include "practicas/PauseScene.hpp"
 
 void PauseScene::HandleEvent(const SDL_Event &event) {
   if (event.type == SDL_EVENT_KEY_DOWN) {

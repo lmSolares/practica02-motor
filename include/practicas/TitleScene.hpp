@@ -1,12 +1,7 @@
 #pragma once
 
-#include "../motor/Scene.hpp"
-#include "../motor/SceneManager.hpp"
-#include <SDL3/SDL_events.h>
-#include <SDL3/SDL_rect.h>
-#include <SDL3/SDL_render.h>
-#include <SDL3/SDL_scancode.h>
-#include <string>
+#include "motor/Scene.hpp"
+#include "motor/SceneManager.hpp"
 
 class GameScene;
 class TitleScene;

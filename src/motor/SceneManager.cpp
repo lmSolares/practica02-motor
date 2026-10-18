@@ -1,4 +1,4 @@
-#include "../../include/motor/SceneManager.hpp"
+#include "motor/SceneManager.hpp"
 #include <utility>
 
 void SceneManager::ChangeScene(std::unique_ptr<Scene> new_scene) {

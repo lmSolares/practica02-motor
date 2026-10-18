@@ -1,5 +1,5 @@
-#include "../../include/motor/GameObject.hpp"
-#include "../../include/motor/Component.hpp"
+#include "motor/GameObject.hpp"
+#include "motor/Component.hpp"
 
 void GameObject::Update(float dt) {
   if (!m_active)

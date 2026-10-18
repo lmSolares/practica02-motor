@@ -1,9 +1,9 @@
-#include "../../include/practicas/PlayerControllerComponent.hpp"
-#include "../../include/motor/ColliderComponent.hpp"
-#include "../../include/motor/RectRenderComponent.hpp"
-#include "../../include/motor/TransformComponent.hpp"
-#include "../../include/motor/Vector2.hpp"
-#include "../../include/practicas/PlayerControllerComponent.hpp"
+#include "practicas/PlayerControllerComponent.hpp"
+#include "motor/ColliderComponent.hpp"
+#include "motor/RectRenderComponent.hpp"
+#include "motor/TransformComponent.hpp"
+#include "motor/Vector2.hpp"
+#include "practicas/PlayerControllerComponent.hpp"
 
 void PlayerControllerComponent::FixedUpdate(float dt) {
   if (!owner)

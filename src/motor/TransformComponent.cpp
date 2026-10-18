@@ -1,4 +1,4 @@
-#include "../../include/motor/TransformComponent.hpp"
+#include "motor/TransformComponent.hpp"
 
 TransformComponent::TransformComponent(Vector2 pos) : position(pos) {}
 

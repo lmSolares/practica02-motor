@@ -1,7 +1,6 @@
 #pragma once
-#include "../../include/motor/Component.hpp"
-#include "../../include/motor/Vector2.hpp"
-#include <SDL3/SDL.h>
+#include "Component.hpp"
+#include "Vector2.hpp"
 
 class RectRenderComponent : public Component {
 public:

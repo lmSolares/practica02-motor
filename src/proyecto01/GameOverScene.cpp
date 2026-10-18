@@ -1,6 +1,6 @@
-#include "../../include/proyecto01/scenes/GameOverScene.hpp"
-#include "../../include/proyecto01/scenes/GameplayScene.hpp"
-#include "../../include/proyecto01/scenes/TitleScene.hpp"
+#include "proyecto01/scenes/GameOverScene.hpp"
+#include "proyecto01/scenes/GameplayScene.hpp"
+#include "proyecto01/scenes/TitleScene.hpp"
 
 void GameOverScene::Render(SDL_Renderer *renderer) {
   SDL_SetRenderDrawColor(renderer, 255, 27, 0, 255);

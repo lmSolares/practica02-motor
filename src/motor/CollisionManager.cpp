@@ -1,6 +1,6 @@
-#include "../../include/motor/CollisionManager.hpp"
-#include "../../include/motor/ColliderComponent.hpp"
-#include "../../include/motor/GameObject.hpp"
+#include "motor/CollisionManager.hpp"
+#include "motor/ColliderComponent.hpp"
+#include "motor/GameObject.hpp"
 
 CollisionManager::CollisionManager(
     std::vector<std::unique_ptr<GameObject>> *entities)

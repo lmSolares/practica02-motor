@@ -1,4 +1,4 @@
-#include "../../include/motor/Scene.hpp"
+#include "motor/Scene.hpp"
 #include <utility>
 
 Scene::Scene(SceneManager *manager, std::string name)

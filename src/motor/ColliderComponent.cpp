@@ -1,6 +1,6 @@
-#include "../../include/motor/ColliderComponent.hpp"
-#include "../../include/motor/GameObject.hpp"
-#include "../../include/motor/TransformComponent.hpp"
+#include "motor/ColliderComponent.hpp"
+#include "motor/GameObject.hpp"
+#include "motor/TransformComponent.hpp"
 
 SDL_FRect ColliderComponent::GetWorldBounds() const {
   if (!owner) {

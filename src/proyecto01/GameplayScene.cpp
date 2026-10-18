@@ -1,7 +1,7 @@
-#include "../../include/proyecto01/scenes/GameplayScene.hpp"
-#include "../../include/motor/ColliderComponent.hpp"
-#include "../../include/proyecto01/scenes/GameOverScene.hpp"
-#include "../../include/proyecto01/scenes/PauseScene.hpp"
+#include "proyecto01/scenes/GameplayScene.hpp"
+#include "motor/ColliderComponent.hpp"
+#include "proyecto01/scenes/GameOverScene.hpp"
+#include "proyecto01/scenes/PauseScene.hpp"
 
 void GameplayScene::Init() {
   m_entities.clear();

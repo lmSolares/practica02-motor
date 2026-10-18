@@ -1,6 +1,6 @@
 #pragma once
-#include "../../include/motor/Component.hpp"
-#include "../../include/motor/Vector2.hpp"
+#include "Component.hpp"
+#include "Vector2.hpp"
 
 class TransformComponent : public Component {
 public:

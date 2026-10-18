@@ -1,11 +1,11 @@
-#include "../../include/practicas/GameScene.hpp"
-#include "../../include/motor/ColliderComponent.hpp"
-#include "../../include/motor/RectRenderComponent.hpp"
-#include "../../include/motor/TransformComponent.hpp"
-#include "../../include/practicas/BallComponent.hpp"
-#include "../../include/practicas/GameOverScene.hpp"
-#include "../../include/practicas/PauseScene.hpp"
-#include "../../include/practicas/PlayerControllerComponent.hpp"
+#include "practicas/GameScene.hpp"
+#include "motor/ColliderComponent.hpp"
+#include "motor/RectRenderComponent.hpp"
+#include "motor/TransformComponent.hpp"
+#include "practicas/BallComponent.hpp"
+#include "practicas/GameOverScene.hpp"
+#include "practicas/PauseScene.hpp"
+#include "practicas/PlayerControllerComponent.hpp"
 
 void GameScene::Init() {
   m_entities.clear();

@@ -1,8 +1,7 @@
 #pragma once
-#include "../motor/Component.hpp"
-#include "../motor/GameObject.hpp"
-#include "../motor/Vector2.hpp"
-#include <SDL3/SDL.h>
+#include "motor/Component.hpp"
+#include "motor/GameObject.hpp"
+#include "motor/Vector2.hpp"
 
 class BallComponent : public Component {
 public:
