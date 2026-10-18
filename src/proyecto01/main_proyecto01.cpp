@@ -74,7 +74,7 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
 
   app->sceneManager.ProcessPendingChanges();
 
-  SDL_SetRenderDrawColor(app->renderer, 25, 25, 30, 255);
+  SDL_SetRenderDrawColor(app->renderer, 20, 50, 76, 255);
   SDL_RenderClear(app->renderer);
 
   app->sceneManager.Render(app->renderer);
