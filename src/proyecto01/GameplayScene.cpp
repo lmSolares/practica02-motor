@@ -69,12 +69,17 @@ void GameplayScene::Init() {
 
   /* Aguijon */
   GameObject *sting = CreateGameObject("Sting");
-  sting->AddComponent<RectRenderComponent>(Vector2{5.0f, 10.0f},
+  sting->AddComponent<TransformComponent>(Vector2{465.0f, 405.0f});
+  sting->AddComponent<RectRenderComponent>(Vector2{5.0f, 40.0f},
                                            SDL_Color{176, 172, 184, 255});
   auto *stingCol = sting->AddComponent<ColliderComponent>();
+  stingCol->size = Vector2{5.0f, 40.0f};
   stingCol->is_trigger = true;
   sting->AddComponent<StingStrikeComponent>();
   sting->SetActive(false);
+
+  knight->GetComponent<KnightControllerComponent>()->SetSting(sting);
+  sting->GetComponent<StingStrikeComponent>()->SetKnight(knight);
 }
 
 void GameplayScene::FixedUpdate(float fixed_dt) {
