@@ -65,7 +65,7 @@ void StingStrikeComponent::Update(float dt) {
   owner->GetComponent<TransformComponent>()->position = stingPos;
 }
 
-void StingStrikeComponent::FixedUpdate(float dt) {}
+void StingStrikeComponent::FixedUpdate(float) {}
 
 void StingStrikeComponent::OnCollision(GameObject *other) {
   if (!owner || !other)
@@ -77,7 +77,8 @@ void StingStrikeComponent::OnCollision(GameObject *other) {
   if (!my_transform || !my_col || !other_col)
     return;
 
-  if (other->GetTag() == "Spike" && is_striking_down) {
+  if ((other->GetTag() == "Spike" || other->GetTag() == "Mantis") &&
+      is_striking_down) {
     knight->GetComponent<KnightControllerComponent>()->velocity.y = -550.0f;
     knight->GetComponent<KnightControllerComponent>()->dash_cooldown = 0.0f;
   }

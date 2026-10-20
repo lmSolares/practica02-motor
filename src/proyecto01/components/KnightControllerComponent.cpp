@@ -111,11 +111,14 @@ void KnightControllerComponent::OnCollision(GameObject *other) {
     return;
 
   if (other_col->is_trigger) {
-    if (other->GetTag() == "Spike" && invulnerability_timer <= 0.0f) {
+    if ((other->GetTag() == "Spike" || other->GetTag() == "Mantis") &&
+        invulnerability_timer <= 0.0f) {
       health -= 1;
       invulnerability_timer = 1.0f;
-      my_transform->position = Vector2{460.0f, 300.0f};
-      velocity = Vector2{0.0f, 0.0f};
+      if (other->GetTag() == "Spike") {
+        my_transform->position = Vector2{460.0f, 300.0f};
+        velocity = Vector2{0.0f, 0.0f};
+      }
     }
     return;
   }
