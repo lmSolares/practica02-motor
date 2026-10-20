@@ -43,7 +43,7 @@ target_include_directories(practica05_motor PRIVATE include src)
 target_link_libraries(practica05_motor PRIVATE motor_core)
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/proyecto01/main_proyecto01.cpp")
-    file(GLOB PROYECTO01_SOURCES "src/proyecto01/*.cpp")
+    file(GLOB_RECURSE PROYECTO01_SOURCES "src/proyecto01/*.cpp")
     add_executable(proyecto01 ${PROYECTO01_SOURCES})
     target_include_directories(proyecto01 PRIVATE include src)
     target_link_libraries(proyecto01 PRIVATE motor_core)
