@@ -5,6 +5,7 @@
 #include "motor/TransformComponent.hpp"
 #include "motor/Vector2.hpp"
 #include "proyecto01/components/KnightControllerComponent.hpp"
+#include "proyecto01/components/MantisControllerComponent.hpp"
 #include "proyecto01/components/StingStrikeComponent.hpp"
 #include "proyecto01/scenes/GameOverScene.hpp"
 #include "proyecto01/scenes/PauseScene.hpp"
@@ -67,7 +68,7 @@ void GameplayScene::Init() {
   knightCol->size = Vector2{32.0f, 48.0f};
   knight->AddComponent<KnightControllerComponent>(300.0f);
 
-  /* Aguijon */
+  // Aguijon
   GameObject *sting = CreateGameObject("Sting");
   sting->AddComponent<TransformComponent>(Vector2{465.0f, 405.0f});
   sting->AddComponent<RectRenderComponent>(Vector2{5.0f, 40.0f},
@@ -80,6 +81,18 @@ void GameplayScene::Init() {
 
   knight->GetComponent<KnightControllerComponent>()->SetSting(sting);
   sting->GetComponent<StingStrikeComponent>()->SetKnight(knight);
+
+  // Mantis
+  GameObject *mantis = CreateGameObject("Mantis");
+  mantis->AddComponent<TransformComponent>(Vector2{-200.0f, 0.0f});
+  mantis->AddComponent<RectRenderComponent>(Vector2{32.0f, 48.0f},
+                                            SDL_Color{176, 172, 184, 255});
+  auto *mantisCol = mantis->AddComponent<ColliderComponent>();
+  mantisCol->is_trigger = true;
+  mantisCol->size = Vector2{32.0f, 48.0f};
+  mantis->AddComponent<MantisControllerComponent>();
+
+  mantis->GetComponent<MantisControllerComponent>()->SetKnight(knight);
 }
 
 void GameplayScene::FixedUpdate(float fixed_dt) {
