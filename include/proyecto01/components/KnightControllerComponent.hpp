@@ -8,6 +8,7 @@ public:
   const float gravity = 1400.0f;
   const float jump_force = -580.0f;
   const float dash_speed = 700.0f;
+  GameObject *sting{nullptr};
   int facing_dir{1};
   int health{5};
   bool is_grounded{false};
@@ -20,6 +21,8 @@ public:
 
   KnightControllerComponent() = default;
   explicit KnightControllerComponent(float spd) : speed(spd) {}
+
+  void SetSting(GameObject *sting);
 
   void Update(float dt) override;
   void FixedUpdate(float dt) override;

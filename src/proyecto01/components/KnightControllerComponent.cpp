@@ -1,9 +1,14 @@
 #include "proyecto01/components/KnightControllerComponent.hpp"
+#include "motor/ColliderComponent.hpp"
 #include "motor/GameObject.hpp"
 #include "motor/RectRenderComponent.hpp"
 #include "motor/TransformComponent.hpp"
 #include "motor/Vector2.hpp"
 #include <SDL3/SDL_scancode.h>
+
+void KnightControllerComponent::SetSting(GameObject *sting) {
+  this->sting = sting;
+}
 
 void KnightControllerComponent::Update(float dt) {
 
@@ -38,6 +43,13 @@ void KnightControllerComponent::Update(float dt) {
   if ((keys[SDL_SCANCODE_Z]) && is_grounded) {
     velocity.y = jump_force;
     is_grounded = false;
+  }
+
+  if (keys[SDL_SCANCODE_X] && sting != nullptr) {
+    if (attack_cooldown <= 0.0f) {
+      sting->SetActive(true);
+      attack_cooldown = 0.4f;
+    }
   }
 
   if ((keys[SDL_SCANCODE_C]) && dash_cooldown <= 0.0f) {
@@ -86,8 +98,6 @@ void KnightControllerComponent::FixedUpdate(float fixed_dt) {
   transform->position =
       transform->position.clamp(Vector2{0.0f, 0.0f}, max_bounds);
 }
-
-#include "motor/ColliderComponent.hpp"
 
 void KnightControllerComponent::OnCollision(GameObject *other) {
   if (!owner || !other)
