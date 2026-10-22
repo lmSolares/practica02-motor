@@ -1,7 +1,9 @@
 #pragma once
 
 #include "motor/Component.hpp"
+#include "motor/SceneManager.hpp"
 #include "motor/Vector2.hpp"
+#include <vector>
 
 class KnightControllerComponent : public Component {
 public:
@@ -18,12 +20,14 @@ public:
   float invulnerability_timer{0.0f};
   float attack_cooldown{0.0f};
   float dash_timer{0.0f};
+  SceneManager *scene_manager;
+  std::vector<GameObject *> masks_hud;
 
   KnightControllerComponent() = default;
   explicit KnightControllerComponent(float spd) : speed(spd) {}
 
   void SetSting(GameObject *sting);
-
+  void SetSceneManager(SceneManager *scene_manger);
   void Update(float dt) override;
   void FixedUpdate(float dt) override;
   void OnCollision(GameObject *other) override;
