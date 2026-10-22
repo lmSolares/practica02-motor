@@ -1,10 +1,15 @@
 #include "proyecto01/components/MantisControllerComponent.hpp"
 #include "motor/TransformComponent.hpp"
 #include "motor/Vector2.hpp"
+#include "proyecto01/components/BoomerangComponent.hpp"
 #include <cstdlib>
 
 void MantisControllerComponent::SetKnight(GameObject *knight) {
   this->knight = knight;
+}
+
+void MantisControllerComponent::SetBoomerang(GameObject *boomerang) {
+  this->boomerang = boomerang;
 }
 
 void MantisControllerComponent::AttackPosition() {
@@ -26,17 +31,48 @@ void MantisControllerComponent::AttackPosition() {
     new_pos.x = knight_pos_x;
     new_pos.y = 250.0f;
     break;
-  case Attack::Proyectil:
+  case Attack::Proyectil: {
+
+    AttackProyectilPos pos = static_cast<AttackProyectilPos>(rand() % 2);
+    TransformComponent *boom_transform =
+        boomerang->GetComponent<TransformComponent>();
+    BoomerangComponent *boom_comp =
+        boomerang->GetComponent<BoomerangComponent>();
+
+    float target_x_start, target_x_end;
+    float target_y_start, target_y_middle;
+
     if (knight_pos_x < 480) {
       facing_dir = -1;
       new_pos.x = 888.0f;
-      new_pos.y = 300.0f;
+      target_x_start = 40.0f;
+      target_x_end = 888.0f;
     } else {
       facing_dir = 1;
       new_pos.x = 40.0f;
-      new_pos.y = 300.0f;
+      target_x_start = 880.0f;
+      target_x_end = 40.0f;
     }
+
+    if (pos == AttackProyectilPos::Low) {
+      new_pos.y = LOW_ATTACK;
+      target_y_start = LOW_ATTACK;
+      target_y_middle = HIGH_ATTACK;
+    } else {
+      new_pos.y = HIGH_ATTACK;
+      target_y_start = HIGH_ATTACK;
+      target_y_middle = LOW_ATTACK;
+    }
+
+    boom_transform->position = new_pos;
+
+    Vector2 p1{target_x_start, target_y_start};
+    Vector2 p2{target_x_start, target_y_middle};
+    Vector2 p3{target_x_end, target_y_middle};
+
+    boom_comp->SetRoute(p1, p2, p3);
     break;
+  }
   }
 
   owner->GetComponent<TransformComponent>()->position = new_pos;
@@ -92,7 +128,11 @@ void MantisControllerComponent::FixedUpdate(float dt) {
   case AttackState::Inactiva:
     state_timer -= dt;
     if (state_timer <= 0) {
-      attack = static_cast<Attack>(rand() % 3);
+      if (!boomerang->IsActive()) {
+        attack = static_cast<Attack>(rand() % 2);
+      } else {
+        attack = static_cast<Attack>(rand() % 3);
+      }
       state = AttackState::Anticipacion;
       state_timer = 0.5f;
       AttackPosition();
@@ -104,6 +144,8 @@ void MantisControllerComponent::FixedUpdate(float dt) {
       state = AttackState::Ejecucion;
     break;
   case AttackState::Ejecucion:
+    if (attack == Attack::Proyectil)
+      boomerang->SetActive(true);
     ExecuteAttack(dt);
     break;
   case AttackState::Recuperacion:
