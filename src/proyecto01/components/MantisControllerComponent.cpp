@@ -1,7 +1,9 @@
 #include "proyecto01/components/MantisControllerComponent.hpp"
+#include "motor/ColliderComponent.hpp"
 #include "motor/TransformComponent.hpp"
 #include "motor/Vector2.hpp"
 #include "proyecto01/components/BoomerangComponent.hpp"
+#include "proyecto01/scenes/WinScene.hpp"
 #include <cstdlib>
 
 void MantisControllerComponent::SetKnight(GameObject *knight) {
@@ -10,6 +12,10 @@ void MantisControllerComponent::SetKnight(GameObject *knight) {
 
 void MantisControllerComponent::SetBoomerang(GameObject *boomerang) {
   this->boomerang = boomerang;
+}
+
+void MantisControllerComponent::SetSceneManager(SceneManager *scene_manager) {
+  this->scene_manager = scene_manager;
 }
 
 void MantisControllerComponent::AttackPosition() {
@@ -124,12 +130,16 @@ void MantisControllerComponent::ExecuteAttack(float fixed_dt) {
 }
 
 void MantisControllerComponent::FixedUpdate(float dt) {
+  if (invulnerability_timer > 0.0f) {
+    invulnerability_timer -= dt;
+  }
   switch (state) {
   case AttackState::Inactiva:
     state_timer -= dt;
     if (state_timer <= 0) {
-      if (!boomerang->IsActive()) {
-        attack = static_cast<Attack>(rand() % 2);
+      if (boomerang->IsActive()) {
+        int choice = rand() % 2;
+        attack = (choice == 0) ? Attack::Suelo : Attack::AtaqueCaida;
       } else {
         attack = static_cast<Attack>(rand() % 3);
       }
@@ -155,5 +165,26 @@ void MantisControllerComponent::FixedUpdate(float dt) {
       state_timer = 0.5f;
     }
     break;
+  }
+}
+
+void MantisControllerComponent::OnCollision(GameObject *other) {
+  if (!owner || !other)
+    return;
+  auto *my_col = owner->GetComponent<ColliderComponent>();
+  auto *other_col = other->GetComponent<ColliderComponent>();
+  if (!my_col || !other_col)
+    return;
+
+  if (other_col->is_trigger) {
+    if ((other->GetTag() == "Sting") && invulnerability_timer <= 0.0f) {
+      health -= 1;
+      invulnerability_timer = 0.3f;
+
+      if (health <= 0) {
+        scene_manager->ChangeScene(std::make_unique<WinScene>(scene_manager));
+      }
+    }
+    return;
   }
 }

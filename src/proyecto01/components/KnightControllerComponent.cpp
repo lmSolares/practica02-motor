@@ -4,10 +4,15 @@
 #include "motor/RectRenderComponent.hpp"
 #include "motor/TransformComponent.hpp"
 #include "motor/Vector2.hpp"
+#include "proyecto01/scenes/GameOverScene.hpp"
 #include <SDL3/SDL_scancode.h>
 
 void KnightControllerComponent::SetSting(GameObject *sting) {
   this->sting = sting;
+}
+
+void KnightControllerComponent::SetSceneManager(SceneManager *scene_manger) {
+  this->scene_manager = scene_manger;
 }
 
 void KnightControllerComponent::Update(float dt) {
@@ -111,9 +116,17 @@ void KnightControllerComponent::OnCollision(GameObject *other) {
     return;
 
   if (other_col->is_trigger) {
-    if ((other->GetTag() == "Spike" || other->GetTag() == "Mantis") &&
+    if ((other->GetTag() == "Spike" || other->GetTag() == "Mantis" ||
+         other->GetTag() == "Boomerang") &&
         invulnerability_timer <= 0.0f) {
       health -= 1;
+      if (health >= 0 && health < (int)masks_hud.size()) {
+        masks_hud[health]->SetActive(false);
+      }
+      if (health <= 0) {
+        scene_manager->ChangeScene(
+            std::make_unique<GameOverScene>(scene_manager));
+      }
       invulnerability_timer = 1.0f;
       if (other->GetTag() == "Spike") {
         my_transform->position = Vector2{460.0f, 300.0f};
