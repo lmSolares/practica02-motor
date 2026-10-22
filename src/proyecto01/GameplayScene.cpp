@@ -4,6 +4,7 @@
 #include "motor/RectRenderComponent.hpp"
 #include "motor/TransformComponent.hpp"
 #include "motor/Vector2.hpp"
+#include "proyecto01/components/BoomerangComponent.hpp"
 #include "proyecto01/components/KnightControllerComponent.hpp"
 #include "proyecto01/components/MantisControllerComponent.hpp"
 #include "proyecto01/components/StingStrikeComponent.hpp"
@@ -93,6 +94,18 @@ void GameplayScene::Init() {
   mantis->AddComponent<MantisControllerComponent>();
 
   mantis->GetComponent<MantisControllerComponent>()->SetKnight(knight);
+
+  GameObject *boomerang = CreateGameObject("Boomerang");
+  boomerang->AddComponent<TransformComponent>(Vector2{200.0f, 0.0f});
+  boomerang->AddComponent<RectRenderComponent>(Vector2{40.0f, 20.0f},
+                                               SDL_Color{176, 172, 184, 255});
+  auto *boomCol = boomerang->AddComponent<ColliderComponent>();
+  boomCol->is_trigger = true;
+  boomCol->size = Vector2{40.0f, 40.0f};
+  boomerang->AddComponent<BoomerangComponent>();
+  boomerang->SetActive(false);
+
+  mantis->GetComponent<MantisControllerComponent>()->SetBoomerang(boomerang);
 }
 
 void GameplayScene::FixedUpdate(float fixed_dt) {
