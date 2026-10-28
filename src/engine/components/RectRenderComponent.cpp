@@ -1,6 +1,6 @@
-#include "motor/RectRenderComponent.hpp"
-#include "motor/GameObject.hpp"
-#include "motor/TransformComponent.hpp"
+#include "engine/components/RectRenderComponent.hpp"
+#include "engine/GameObject.hpp"
+#include "engine/components/TransformComponent.hpp"
 
 RectRenderComponent::RectRenderComponent(Vector2 sz, SDL_Color col)
     : size(sz), color(col) {}

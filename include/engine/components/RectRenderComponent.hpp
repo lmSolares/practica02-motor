@@ -1,6 +1,7 @@
 #pragma once
-#include "Component.hpp"
-#include "Vector2.hpp"
+
+#include "engine/Component.hpp"
+#include "math/Vector2.hpp"
 
 class RectRenderComponent : public Component {
 public:
