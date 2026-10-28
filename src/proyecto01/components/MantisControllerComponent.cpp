@@ -1,7 +1,7 @@
 #include "proyecto01/components/MantisControllerComponent.hpp"
-#include "motor/ColliderComponent.hpp"
-#include "motor/TransformComponent.hpp"
-#include "motor/Vector2.hpp"
+#include "engine/components/ColliderComponent.hpp"
+#include "engine/components/TransformComponent.hpp"
+#include "math/Vector2.hpp"
 #include "proyecto01/components/BoomerangComponent.hpp"
 #include "proyecto01/scenes/WinScene.hpp"
 #include <cstdlib>

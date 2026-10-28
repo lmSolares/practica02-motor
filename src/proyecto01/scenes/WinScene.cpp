@@ -1,6 +1,6 @@
 #include "proyecto01/scenes/WinScene.hpp"
-#include "motor/GameObject.hpp"
-#include "motor/TransformComponent.hpp"
+#include "engine/GameObject.hpp"
+#include "engine/components/TransformComponent.hpp"
 #include "proyecto01/components/TextRenderComponent.hpp"
 #include "proyecto01/scenes/TitleScene.hpp"
 

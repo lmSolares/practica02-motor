@@ -1,9 +1,9 @@
 #include "proyecto01/components/KnightControllerComponent.hpp"
-#include "motor/ColliderComponent.hpp"
-#include "motor/GameObject.hpp"
-#include "motor/RectRenderComponent.hpp"
-#include "motor/TransformComponent.hpp"
-#include "motor/Vector2.hpp"
+#include "engine/GameObject.hpp"
+#include "engine/components/ColliderComponent.hpp"
+#include "engine/components/RectRenderComponent.hpp"
+#include "engine/components/TransformComponent.hpp"
+#include "math/Vector2.hpp"
 #include "proyecto01/scenes/GameOverScene.hpp"
 #include <SDL3/SDL_scancode.h>
 

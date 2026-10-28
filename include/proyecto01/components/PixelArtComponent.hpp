@@ -1,6 +1,6 @@
 #pragma once
 
-#include "motor/Component.hpp"
+#include "engine/Component.hpp"
 #include <string>
 #include <vector>
 

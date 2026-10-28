@@ -1,6 +1,6 @@
 #include "proyecto01/components/PixelArtComponent.hpp"
-#include "motor/GameObject.hpp"
-#include "motor/TransformComponent.hpp"
+#include "engine/GameObject.hpp"
+#include "engine/components/TransformComponent.hpp"
 
 void PixelArtComponent::Render(SDL_Renderer *renderer) {
   if (!owner || pixels.empty())

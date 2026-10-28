@@ -1,5 +1,5 @@
-#include "motor/Component.hpp"
-#include "motor/Vector2.hpp"
+#include "engine/Component.hpp"
+#include "math/Vector2.hpp"
 
 enum class MovingTo { start, middle, end };
 

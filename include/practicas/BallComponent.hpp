@@ -1,7 +1,7 @@
 #pragma once
-#include "motor/Component.hpp"
-#include "motor/GameObject.hpp"
-#include "motor/Vector2.hpp"
+#include "engine/Component.hpp"
+#include "engine/GameObject.hpp"
+#include "math/Vector2.hpp"
 
 class BallComponent : public Component {
 public:

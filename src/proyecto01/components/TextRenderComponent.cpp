@@ -1,6 +1,6 @@
 #include "proyecto01/components/TextRenderComponent.hpp"
-#include "motor/GameObject.hpp"
-#include "motor/TransformComponent.hpp"
+#include "engine/GameObject.hpp"
+#include "engine/components/TransformComponent.hpp"
 
 TextRenderComponent::TextRenderComponent(std::string t, float size, SDL_Color c)
     : text(t), pixel_size(size), color(c) {

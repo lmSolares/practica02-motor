@@ -1,8 +1,8 @@
 #pragma once
 
-#include "motor/Component.hpp"
-#include "motor/GameObject.hpp"
-#include "motor/SceneManager.hpp"
+#include "engine/Component.hpp"
+#include "engine/GameObject.hpp"
+#include "engine/SceneManager.hpp"
 
 enum class Attack { Suelo, Proyectil, AtaqueCaida };
 enum class AttackState { Inactiva, Anticipacion, Ejecucion, Recuperacion };

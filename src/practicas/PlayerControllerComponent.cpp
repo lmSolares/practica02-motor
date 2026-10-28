@@ -1,8 +1,8 @@
 #include "practicas/PlayerControllerComponent.hpp"
-#include "motor/ColliderComponent.hpp"
-#include "motor/RectRenderComponent.hpp"
-#include "motor/TransformComponent.hpp"
-#include "motor/Vector2.hpp"
+#include "engine/components/ColliderComponent.hpp"
+#include "engine/components/RectRenderComponent.hpp"
+#include "engine/components/TransformComponent.hpp"
+#include "math/Vector2.hpp"
 #include "practicas/PlayerControllerComponent.hpp"
 
 void PlayerControllerComponent::FixedUpdate(float dt) {

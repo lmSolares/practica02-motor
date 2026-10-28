@@ -1,5 +1,5 @@
 #pragma once
-#include "motor/Component.hpp"
+#include "engine/Component.hpp"
 #include <SDL3/SDL.h>
 #include <string>
 #include <unordered_map>

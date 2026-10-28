@@ -1,7 +1,7 @@
 #include "proyecto01/components/BoomerangComponent.hpp"
-#include "motor/GameObject.hpp"
-#include "motor/TransformComponent.hpp"
-#include "motor/Vector2.hpp"
+#include "engine/GameObject.hpp"
+#include "engine/components/TransformComponent.hpp"
+#include "math/Vector2.hpp"
 
 void BoomerangComponent::SetRoute(Vector2 start, Vector2 middle, Vector2 end) {
   this->start = start;

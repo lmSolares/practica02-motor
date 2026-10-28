@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(practica05_motor LANGUAGES CXX)
+project(practica06_motor LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -17,19 +17,19 @@ else()
 endif()
 
 add_library(motor_core STATIC
-    src/motor/Vector2.cpp
-    src/motor/GameObject.cpp
-    src/motor/TransformComponent.cpp
-    src/motor/RectRenderComponent.cpp
-    src/motor/ColliderComponent.cpp
-    src/motor/CollisionManager.cpp
-    src/motor/Scene.cpp
-    src/motor/SceneManager.cpp
+    src/math/Vector2.cpp
+    src/engine/GameObject.cpp
+    src/engine/components/TransformComponent.cpp
+    src/engine/components/RectRenderComponent.cpp
+    src/engine/components/ColliderComponent.cpp
+    src/physics/CollisionManager.cpp
+    src/engine/Scene.cpp
+    src/engine/SceneManager.cpp
 )
 target_include_directories(motor_core PUBLIC include)
 target_link_libraries(motor_core PUBLIC ${SDL3_TARGET})
 
-add_executable(practica05_motor
+add_executable(practica06_motor
     src/practicas/main_pelota.cpp
     src/practicas/BallComponent.cpp
     src/practicas/PatrolComponent.cpp
@@ -39,8 +39,8 @@ add_executable(practica05_motor
     src/practicas/PauseScene.cpp
     src/practicas/GameOverScene.cpp
 )
-target_include_directories(practica05_motor PRIVATE include src)
-target_link_libraries(practica05_motor PRIVATE motor_core)
+target_include_directories(practica06_motor PRIVATE include src)
+target_link_libraries(practica06_motor PRIVATE motor_core)
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/proyecto01/main_proyecto01.cpp")
     file(GLOB_RECURSE PROYECTO01_SOURCES "src/proyecto01/*.cpp")

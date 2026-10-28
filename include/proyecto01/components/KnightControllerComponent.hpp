@@ -1,8 +1,8 @@
 #pragma once
 
-#include "motor/Component.hpp"
-#include "motor/SceneManager.hpp"
-#include "motor/Vector2.hpp"
+#include "engine/Component.hpp"
+#include "engine/SceneManager.hpp"
+#include "math/Vector2.hpp"
 #include <vector>
 
 class KnightControllerComponent : public Component {

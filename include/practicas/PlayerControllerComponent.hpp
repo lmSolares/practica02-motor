@@ -1,6 +1,6 @@
 #pragma once
-#include "motor/Component.hpp"
-#include "motor/GameObject.hpp"
+#include "engine/Component.hpp"
+#include "engine/GameObject.hpp"
 
 class PlayerControllerComponent : public Component {
 public:
