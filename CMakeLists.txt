@@ -6,6 +6,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_compile_options(-Wall -Wextra -Wpedantic)
+option(ENABLE_ASAN "Habilitar AddressSanitizer" OFF)
+if(ENABLE_ASAN)
+    add_compile_options(-fsanitize=address -g -fno-omit-frame-pointer)
+    add_link_options(-fsanitize=address)
+endif()
 
 find_package(SDL3 QUIET)
 if(NOT SDL3_FOUND)
@@ -14,6 +19,15 @@ if(NOT SDL3_FOUND)
     set(SDL3_TARGET PkgConfig::SDL3)
 else()
     set(SDL3_TARGET SDL3::SDL3)
+endif()
+
+find_package(SDL3_image QUIET)
+if(NOT SDL3_image_FOUND)
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(SDL3_IMAGE REQUIRED IMPORTED_TARGET sdl3-image)
+    set(SDL3_IMAGE_TARGET PkgConfig::SDL3_IMAGE)
+else()
+    set(SDL3_IMAGE_TARGET SDL3_image::SDL3_image)
 endif()
 
 add_library(motor_core STATIC
@@ -25,6 +39,8 @@ add_library(motor_core STATIC
     src/physics/CollisionManager.cpp
     src/engine/Scene.cpp
     src/engine/SceneManager.cpp
+    src/engine/ResourceManager.cpp
+    src/engine/components/SpriteComponent.cpp
 )
 target_include_directories(motor_core PUBLIC include)
 target_link_libraries(motor_core PUBLIC ${SDL3_TARGET})
