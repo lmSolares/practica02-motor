@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_compile_options(-Wall -Wextra -Wpedantic)
+
 option(ENABLE_ASAN "Habilitar AddressSanitizer" OFF)
 if(ENABLE_ASAN)
     add_compile_options(-fsanitize=address -g -fno-omit-frame-pointer)
@@ -36,31 +37,25 @@ add_library(motor_core STATIC
     src/engine/components/TransformComponent.cpp
     src/engine/components/RectRenderComponent.cpp
     src/engine/components/ColliderComponent.cpp
+    src/engine/components/SpriteComponent.cpp
+    src/engine/ResourceManager.cpp
     src/physics/CollisionManager.cpp
     src/engine/Scene.cpp
     src/engine/SceneManager.cpp
-    src/engine/ResourceManager.cpp
-    src/engine/components/SpriteComponent.cpp
 )
 target_include_directories(motor_core PUBLIC include)
-target_link_libraries(motor_core PUBLIC ${SDL3_TARGET})
+target_link_libraries(motor_core PUBLIC ${SDL3_TARGET} ${SDL3_IMAGE_TARGET})
 
 add_executable(practica06_motor
-    src/practicas/main_pelota.cpp
-    src/practicas/BallComponent.cpp
-    src/practicas/PatrolComponent.cpp
-    src/practicas/PlayerControllerComponent.cpp
-    src/practicas/TitleScene.cpp
-    src/practicas/GameScene.cpp
-    src/practicas/PauseScene.cpp
-    src/practicas/GameOverScene.cpp
+    src/practicas/main_demo.cpp
+    src/practicas/ResourceDemoScene.cpp
 )
 target_include_directories(practica06_motor PRIVATE include src)
-target_link_libraries(practica06_motor PRIVATE motor_core)
+target_link_libraries(practica06_motor PRIVATE motor_core ${SDL3_IMAGE_TARGET})
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/proyecto01/main_proyecto01.cpp")
     file(GLOB_RECURSE PROYECTO01_SOURCES "src/proyecto01/*.cpp")
     add_executable(proyecto01 ${PROYECTO01_SOURCES})
     target_include_directories(proyecto01 PRIVATE include src)
-    target_link_libraries(proyecto01 PRIVATE motor_core)
+    target_link_libraries(proyecto01 PRIVATE motor_core ${SDL3_IMAGE_TARGET})
 endif()
