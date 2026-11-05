@@ -1,4 +1,5 @@
 #include "engine/components/SpriteComponent.hpp"
+#include "engine/Camera2D.hpp"
 #include "engine/GameObject.hpp"
 #include "engine/components/TransformComponent.hpp"
 
@@ -23,6 +24,19 @@ void SpriteComponent::Render(SDL_Renderer *renderer) {
       dstRect.y = transform->position.y;
       dstRect.w = (m_useSrcRect ? m_srcRect.w : m_width) * transform->scale.x;
       dstRect.h = (m_useSrcRect ? m_srcRect.h : m_height) * transform->scale.y;
+    }
+  }
+
+  if (m_affectedByCamera) {
+    Camera2D *camera = Camera2D::GetMain();
+    if (camera != nullptr) {
+
+      if (m_parallaxFactor.x > 0.0f || m_parallaxFactor.y > 0.0f) {
+        if (!camera->IsVisible(dstRect)) {
+          return;
+        }
+      }
+      dstRect = camera->ApplyToRect(dstRect, m_parallaxFactor);
     }
   }
 
