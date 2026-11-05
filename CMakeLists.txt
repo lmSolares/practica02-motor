@@ -34,10 +34,12 @@ endif()
 add_library(motor_core STATIC
     src/math/Vector2.cpp
     src/engine/GameObject.cpp
+    src/engine/Camera2D.cpp
     src/engine/components/TransformComponent.cpp
     src/engine/components/RectRenderComponent.cpp
     src/engine/components/ColliderComponent.cpp
     src/engine/components/SpriteComponent.cpp
+    src/engine/components/AnimationComponent.cpp
     src/engine/ResourceManager.cpp
     src/physics/CollisionManager.cpp
     src/engine/Scene.cpp
@@ -46,12 +48,12 @@ add_library(motor_core STATIC
 target_include_directories(motor_core PUBLIC include)
 target_link_libraries(motor_core PUBLIC ${SDL3_TARGET} ${SDL3_IMAGE_TARGET})
 
-add_executable(practica06_motor
+add_executable(practica07_motor
     src/practicas/main_demo.cpp
-    src/practicas/ResourceDemoScene.cpp
+    src/practicas/RenderDemoScene.cpp
 )
-target_include_directories(practica06_motor PRIVATE include src)
-target_link_libraries(practica06_motor PRIVATE motor_core ${SDL3_IMAGE_TARGET})
+target_include_directories(practica07_motor PRIVATE include src)
+target_link_libraries(practica07_motor PRIVATE motor_core ${SDL3_IMAGE_TARGET})
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/src/proyecto01/main_proyecto01.cpp")
     file(GLOB_RECURSE PROYECTO01_SOURCES "src/proyecto01/*.cpp")
