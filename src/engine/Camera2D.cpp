@@ -2,6 +2,8 @@
 #include "math/Vector2.hpp"
 #include <algorithm>
 
+Camera2D *Camera2D::s_mainCamera = nullptr;
+
 Camera2D::Camera2D(float viewportW, float viewportH) {
   m_viewportSize = Vector2{viewportW, viewportH};
   if (s_mainCamera == nullptr)
