@@ -33,7 +33,7 @@ void RenderDemoScene::LoadEntities() {
 
   SDL_Texture *texGround = m_resourceManager.GetTexture("assets/ground.png");
   GameObject *ground = CreateGameObject("Ground");
-  ground->AddComponent<TransformComponent>(Vector2{0.0f, 476.0f},
+  ground->AddComponent<TransformComponent>(Vector2{0.0f, 444.0f},
                                            Vector2{3.0f, 1.0f});
   auto *groundSprite = ground->AddComponent<SpriteComponent>(texGround);
   groundSprite->SetLayer(0);
