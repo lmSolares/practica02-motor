@@ -1,6 +1,6 @@
 #define SDL_MAIN_USE_CALLBACKS 1
 #include "engine/SceneManager.hpp"
-#include "practicas/ResourceDemoScene.hpp"
+#include "practicas/RenderDemoScene.hpp"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <memory>
@@ -31,7 +31,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
   ::appstate.renderer = renderer;
   ::appstate.last_ticks = SDL_GetTicks();
   ::appstate.sceneManager.ChangeScene(
-      std::make_unique<ResourceDemoScene>(&::appstate.sceneManager));
+      std::make_unique<RenderDemoScene>(&::appstate.sceneManager));
   ::appstate.sceneManager.ProcessPendingChanges();
   *appstate = &::appstate;
   return SDL_APP_CONTINUE;
