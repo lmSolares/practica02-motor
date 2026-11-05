@@ -43,3 +43,7 @@ Vector2 Vector2::clamp(const Vector2 &min_val, const Vector2 &max_val) const {
 
   return Vector2{clamped_x, clamped_y};
 }
+
+Vector2 Vector2::Lerp(const Vector2 &a, const Vector2 &b, float t) {
+  return a + (b - a) * t;
+}

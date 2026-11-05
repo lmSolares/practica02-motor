@@ -20,4 +20,6 @@ struct Vector2 {
   Vector2 normalized() const;
 
   Vector2 clamp(const Vector2 &min_val, const Vector2 &max_val) const;
+
+  static Vector2 Lerp(const Vector2 &a, const Vector2 &b, float t);
 };
